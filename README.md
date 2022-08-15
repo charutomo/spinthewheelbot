@@ -50,7 +50,7 @@ python3 -m pip install -r requirements.txt
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/qijie44/flaskcontroller.git
+   git clone https://github.com/qijie44/spinthewheelbot.git
    ```
 2. Modify the template for your project
 
