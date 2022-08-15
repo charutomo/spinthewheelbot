@@ -52,7 +52,9 @@ python3 -m pip install -r requirements.txt
    ```sh
    git clone https://github.com/qijie44/spinthewheelbot.git
    ```
-2. Modify the template for your project
+2. Generate a new bot using [botfather](https://t.me/botfather) and copy the token generated
+3. Paste the token into bot.ini, replacing YOUR_BOT_TOKEN_HERE and save.
+4. Run the bot.py using python
 
 <!-- LICENSE -->
 ## License
