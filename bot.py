@@ -7,7 +7,7 @@ import random
 
 
 config = configparser.ConfigParser()
-config.read("bot2.ini")
+config.read("bot.ini")
 
 updater = Updater(token=config["KEYS"]["BOT_TOKEN"], use_context="true")
 dispatcher = updater.dispatcher
