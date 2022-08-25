@@ -24,15 +24,29 @@ def spin_the_wheel(update, context):
     data[update.effective_chat.id]= [[], 0]
     context.bot.send_message(chat_id= update.effective_chat.id, text="Wheel started! Please type in the choices.")
 
-def add_choice(update, context):
+def add(update, context):
     # if the array exists, add to it and inform the user
-    if update.effective_chat.id in data:
-        data[update.effective_chat.id][0].append(update.message.text)
-        message = update.message.text + " added!"
-        context.bot.send_message(chat_id= update.effective_chat.id, text=message)
+    if (update.effective_chat.id in data) and (context.args != []):
+        data[update.effective_chat.id][0].append(context.args[0])
+        message = context.args[0] + " added!"
+    elif (context.args == []):
+        message = "Please add a choice after the command!"
+    context.bot.send_message(chat_id= update.effective_chat.id, text=message)
+
+def remove(update, context):
+    # if the array exists, remove from it and inform the user
+    if (update.effective_chat.id in data) and (context.args != []):
+        try:
+            data[update.effective_chat.id][0].remove(context.args[0])
+            message = context.args[0] + " removed!"
+        except:
+            message = context.args[0] + " does not exist!"
+    elif (context.args == []):
+        message = "Please add a choice after the command!"
+    context.bot.send_message(chat_id= update.effective_chat.id, text=message)
 
 def spin(update, context):
-    if update.effective_chat.id in data:
+    if (update.effective_chat.id in data) and (data[update.effective_chat.id][1] != []):
         # returns a random choice from the list and delete the list
         choice = random.choice(data[update.effective_chat.id][0])
         data[update.effective_chat.id][1] = datetime.datetime.now()
@@ -47,5 +61,6 @@ def spin(update, context):
 dispatcher.add_handler(CommandHandler("start", start))
 dispatcher.add_handler(CommandHandler("spin_the_wheel", spin_the_wheel))
 dispatcher.add_handler(CommandHandler("spin", spin))
-dispatcher.add_handler(CommandHandler("add_choice", add_choice))
+dispatcher.add_handler(CommandHandler("add", add))
+dispatcher.add_handler(CommandHandler("remove", remove))
 updater.start_polling()
