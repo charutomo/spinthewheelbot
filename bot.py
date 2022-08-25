@@ -24,7 +24,7 @@ def spin_the_wheel(update, context):
     data[update.effective_chat.id]= [[], 0]
     context.bot.send_message(chat_id= update.effective_chat.id, text="Wheel started! Please type in the choices.")
 
-def text(update, context):
+def add_choice(update, context):
     # if the array exists, add to it and inform the user
     if update.effective_chat.id in data:
         data[update.effective_chat.id][0].append(update.message.text)
@@ -47,5 +47,5 @@ def spin(update, context):
 dispatcher.add_handler(CommandHandler("start", start))
 dispatcher.add_handler(CommandHandler("spin_the_wheel", spin_the_wheel))
 dispatcher.add_handler(CommandHandler("spin", spin))
-dispatcher.add_handler(MessageHandler(Filters.text, text))
+dispatcher.add_handler(CommandHandler("add_choice", add_choice))
 updater.start_polling()
