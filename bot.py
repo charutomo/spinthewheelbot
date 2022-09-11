@@ -33,8 +33,11 @@ def spin_the_wheel(update, context):
 def add(update, context):
     # if the array exists, add to it and inform the user
     if (update.effective_chat.id in data) and (context.args != []):
-        data[update.effective_chat.id][0].append(context.args[0])
-        message = context.args[0] + " added!"
+        sentence = ""
+        for i in range(len(context.args)):
+            sentence += context.args[i] +" "
+        data[update.effective_chat.id][0].append(sentence)
+        message = sentence + " added!"
     elif (context.args == []):
         message = "Please add a choice after the command!"
     context.bot.send_message(chat_id= update.effective_chat.id, text=message)
@@ -43,10 +46,13 @@ def remove(update, context):
     # if the array exists, remove from it and inform the user
     if (update.effective_chat.id in data) and (context.args != []):
         try:
-            data[update.effective_chat.id][0].remove(context.args[0])
-            message = context.args[0] + " removed!"
+            sentence = ""
+            for i in range(len(context.args)):
+                sentence += context.args[i] +" "
+            data[update.effective_chat.id][0].remove(sentence)
+            message = sentence + " removed!"
         except:
-            message = context.args[0] + " does not exist!"
+            message = sentence + " does not exist!"
     elif (context.args == []):
         message = "Please add a choice after the command!"
     context.bot.send_message(chat_id= update.effective_chat.id, text=message)
