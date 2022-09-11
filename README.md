@@ -55,6 +55,7 @@ python3 -m pip install -r requirements.txt
 2. Generate a new bot using [botfather](https://t.me/botfather) and copy the token generated
 3. Paste the token into bot.ini, replacing YOUR_BOT_TOKEN_HERE and save.
 4. Run the bot.py using python
+5. Edit commands on botfather by using the command list from commands.txt
 
 <!-- LICENSE -->
 ## License

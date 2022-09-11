@@ -16,7 +16,13 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
                     level=logging.INFO)
 
 def start(update, context):
-    context.bot.send_message(chat_id= update.effective_chat.id, text="I'm a bot, please talk to me!")
+    context.bot.send_message(chat_id= update.effective_chat.id, 
+    text="""
+    spin_the_wheel - starts a wheel
+spin - spin the wheel
+add - add an option to the wheel
+remove - remove an option from the wheel
+flip - flip a coin""")
     print(update.effective_user.id)
 
 def spin_the_wheel(update, context):
@@ -58,9 +64,14 @@ def spin(update, context):
     else:
         context.bot.send_message(chat_id= update.effective_chat.id, text="Please run the /spin_the_wheel command to start a wheel!")
 
+def flip(update, context):
+    context.bot.send_message(chat_id= update.effective_chat.id, text=random.choice(["Heads", "Tails"]))
+
+
 dispatcher.add_handler(CommandHandler("start", start))
 dispatcher.add_handler(CommandHandler("spin_the_wheel", spin_the_wheel))
 dispatcher.add_handler(CommandHandler("spin", spin))
 dispatcher.add_handler(CommandHandler("add", add))
 dispatcher.add_handler(CommandHandler("remove", remove))
+dispatcher.add_handler(CommandHandler("flip", flip))
 updater.start_polling()
