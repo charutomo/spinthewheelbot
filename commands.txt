@@ -1,0 +1,5 @@
+spin_the_wheel - starts a wheel
+spin - spin the wheel
+add - add an option to the wheel
+remove - remove an option from the wheel
+flip - flip a coin
