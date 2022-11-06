@@ -3,7 +3,7 @@ from telegram.ext import CommandHandler
 from telegram.ext import MessageHandler, Filters
 import configparser
 import logging
-import random
+import secrets
 import datetime
 
 config = configparser.ConfigParser()
@@ -35,7 +35,7 @@ def add(update, context):
     if (update.effective_chat.id in data) and (context.args != []):
         sentence = ""
         for i in range(len(context.args)):
-            sentence += context.args[i] +" "
+            sentence += context.args[i]
         data[update.effective_chat.id][0].append(sentence)
         message = sentence + " added!"
     elif (context.args == []):
@@ -60,7 +60,7 @@ def remove(update, context):
 def spin(update, context):
     if (update.effective_chat.id in data) and (data[update.effective_chat.id][1] != []):
         # returns a random choice from the list and delete the list
-        choice = random.choice(data[update.effective_chat.id][0])
+        choice = secrets.choice(data[update.effective_chat.id][0])
         data[update.effective_chat.id][1] = datetime.datetime.now()
         message = choice + " was selected!"
         context.bot.send_message(chat_id= update.effective_chat.id, text=message)
@@ -71,7 +71,7 @@ def spin(update, context):
         context.bot.send_message(chat_id= update.effective_chat.id, text="Please run the /spin_the_wheel command to start a wheel!")
 
 def flip(update, context):
-    context.bot.send_message(chat_id= update.effective_chat.id, text=random.choice(["Heads", "Tails"]))
+    context.bot.send_message(chat_id= update.effective_chat.id, text=secrets.choice(["Heads", "Tails"]))
 
 
 dispatcher.add_handler(CommandHandler("start", start))
